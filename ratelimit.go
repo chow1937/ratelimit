@@ -181,6 +181,20 @@ func (tb *Bucket) Available() int64 {
 	return tb.available(time.Now())
 }
 
+// AvailTick returns the bucket's availTick field value, which could be
+// used to count next fill time with startTime.
+func (tb *Bucket) AvailTick() int64 {
+	tb.mu.Lock()
+	defer tb.mu.Unlock()
+	tb.adjust(time.Now())
+	return tb.availTick
+}
+
+// StartTime returns bucket's startTime field value.
+func (tb *Bucket) StartTime() time.Time {
+	return tb.startTime
+}
+
 // available is the internal version of available - it takes the current time as
 // an argument to enable easy testing.
 func (tb *Bucket) available(now time.Time) int64 {
