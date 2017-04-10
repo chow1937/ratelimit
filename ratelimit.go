@@ -195,6 +195,11 @@ func (tb *Bucket) StartTime() time.Time {
 	return tb.startTime
 }
 
+// FillInterval returns bucket's fillInterval field value.
+func (tb *Bucket) FillInterval() time.Duration {
+	return tb.fillInterval
+}
+
 // available is the internal version of available - it takes the current time as
 // an argument to enable easy testing.
 func (tb *Bucket) available(now time.Time) int64 {
